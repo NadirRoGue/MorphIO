@@ -1,5 +1,6 @@
 #pragma once
 
+#include <morphio/properties.h>
 #include <morphio/morphology.h>
 #include <morphio/types.h>
 
@@ -25,23 +26,32 @@ namespace morphio {
  *
  * @version unstable
  */
-class Soma
+struct Soma
 {
-  public:
+    Soma() = default;
+    Soma(const Soma& soma) = default;
+
+    explicit Soma(const std::shared_ptr<Property::Properties>& properties);
+    explicit Soma(const Property::PointLevel& point_properties);
+
     /**
      * Return the  coordinates (x,y,z) of all soma points
      **/
-    inline range<const Point> points() const noexcept;
+    std::vector<Point>& points() noexcept;
+    const std::vector<Point>& points() const noexcept;
 
     /**
      * Return the diameters of all soma points
      **/
-    inline range<const floatType> diameters() const noexcept;
+
+    std::vector<morphio::floatType>& diameters() noexcept;
+    const std::vector<morphio::floatType>& diameters() const noexcept;
 
     /**
      * Return the soma type
      **/
-    inline SomaType type() const noexcept;
+    SomaType type() const noexcept;
+
     /**
      * Return the center of gravity of the soma points
      **/
@@ -65,28 +75,16 @@ class Soma
      */
     floatType maxDistance() const;
 
-  private:
-    explicit Soma(const std::shared_ptr<Property::Properties>&);
-    // TODO: find out why the following line does not work
-    // when friend class Morphology; is removed
-    // template <typename Property>
-    // friend const morphio::Soma morphio::Morphology::soma() const;
-    friend class Morphology;
-    friend class mut::Soma;
+    Property::PointLevel& properties() noexcept { return properties_; }
+    const Property::PointLevel& properties() const noexcept { return properties_; }
 
-    std::shared_ptr<Property::Properties> _properties;
+  private:
+
+    SomaType soma_type_ = SOMA_UNDEFINED;
+    Property::PointLevel properties_;
 };
 
-inline range<const Point> Soma::points() const noexcept {
-    return _properties->_somaLevel._points;
-}
-
-inline range<const floatType> Soma::diameters() const noexcept {
-    return _properties->_somaLevel._diameters;
-}
-
-inline SomaType Soma::type() const noexcept {
-    return _properties->_cellLevel._somaType;
-}
+std::ostream& operator<<(std::ostream& os, const std::shared_ptr<Soma>& sectionPtr);
+std::ostream& operator<<(std::ostream& os, const Soma& soma);
 
 }  // namespace morphio

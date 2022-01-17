@@ -10,7 +10,7 @@
 #include <morphio/exceptions.h>
 #include <morphio/mut/endoplasmic_reticulum.h>
 #include <morphio/mut/mitochondria.h>
-#include <morphio/mut/soma.h>
+#include <morphio/soma.h>
 #include <morphio/properties.h>
 #include <morphio/section.h>
 #include <morphio/types.h>
@@ -68,14 +68,14 @@ class Morphology
 
        Note: multiple morphologies can share the same Soma instance
     **/
-    inline std::shared_ptr<Soma>& soma() noexcept;
+    std::shared_ptr<Soma> soma() noexcept { return _soma; }
 
     /**
        Returns a shared pointer on the Soma
 
        Note: multiple morphologies can share the same Soma instance
     **/
-    inline const std::shared_ptr<Soma>& soma() const noexcept;
+    const std::shared_ptr<Soma> soma() const noexcept { return _soma; }
 
     /**
      * Return the mitochondria container class
@@ -252,13 +252,6 @@ inline const std::map<uint32_t, std::shared_ptr<Section>>& Morphology::sections(
     return _sections;
 }
 
-inline std::shared_ptr<Soma>& Morphology::soma() noexcept {
-    return _soma;
-}
-
-inline const std::shared_ptr<Soma>& Morphology::soma() const noexcept {
-    return _soma;
-}
 
 inline Mitochondria& Morphology::mitochondria() noexcept {
     return _mitochondria;

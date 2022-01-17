@@ -5,6 +5,7 @@ pybind11_add_module(_morphio SYSTEM
     bind_immutable.cpp
     bindings_utils.cpp
     bind_misc.cpp
+    bind_soma.cpp
     bind_mutable.cpp
     bind_vasculature.cpp
 )
