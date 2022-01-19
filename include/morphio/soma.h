@@ -31,7 +31,7 @@ struct Soma
     Soma() = default;
     Soma(const Soma& soma) = default;
 
-    explicit Soma(const std::shared_ptr<Property::Properties>& properties);
+    explicit Soma(const Property::Properties& properties);
     explicit Soma(const Property::PointLevel& point_properties);
 
     /**

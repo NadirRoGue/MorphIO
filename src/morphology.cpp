@@ -55,7 +55,7 @@ Morphology& Morphology::operator=(Morphology&&) noexcept = default;
 Morphology::~Morphology() = default;
 
 Soma Morphology::soma() const {
-    return Soma(_properties);
+    return Soma(*_properties);
 }
 
 Mitochondria Morphology::mitochondria() const {

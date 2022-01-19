@@ -7,9 +7,9 @@
 namespace morphio {
 
 
-Soma::Soma(const std::shared_ptr<Property::Properties>& properties)
-    : soma_type_(properties->_cellLevel._somaType),
-      properties_(properties->_somaLevel) {}
+Soma::Soma(const Property::Properties& properties)
+    : soma_type_(properties._cellLevel._somaType),
+      properties_(properties._somaLevel) {}
 
 
 Soma::Soma(const Property::PointLevel& point_properties)
