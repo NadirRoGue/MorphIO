@@ -8,8 +8,8 @@ namespace morphio {
 
 
 Soma::Soma(const Property::Properties& properties)
-    : soma_type_(properties._cellLevel._somaType),
-      properties_(properties._somaLevel) {}
+    : soma_type_(properties._cellLevel._somaType)
+    , properties_(properties._somaLevel) {}
 
 
 Soma::Soma(const Property::PointLevel& point_properties)
